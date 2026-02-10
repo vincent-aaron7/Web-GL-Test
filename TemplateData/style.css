@@ -31,7 +31,7 @@
     #background-icons {
       width: 100%;
       height: 100%;
-      background-image: url(petOverview.png);
+      background-image: url(icons.png);
       background-repeat: repeat ;
       background-position: 0 0;
       background-size: cover;
@@ -39,21 +39,12 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      /* animation: diagonal-scroll 5s linear infinite; */
+      animation: diagonal-scroll 5s linear infinite;
     }
 
-     /* .dim-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgb(0, 0, 0, 0.5);
-      z-index: 1;
-    } */
 
 
-    /* @keyframes diagonal-scroll {
+    @keyframes diagonal-scroll {
       from {
         background-position: 0 0;
       }
@@ -61,12 +52,13 @@
       to {
         background-position: -200px 200px;
       }
-    } */
+    }
 
     #dog-icon {
       width: 75px;
       height: 60px;
-      margin-bottom: -20px;
+      /* Give the dog some space above the text */
+      margin-bottom: 10px;
     }
 
     p {
@@ -79,7 +71,8 @@
     }
 
     #loading-text {
-      margin: 15px 0px 10px 0px;
+      /* Extra top margin so text is not too close to the dog */
+      margin: 20px 0px 10px 0px;
       font-size: 17px;
     }
 

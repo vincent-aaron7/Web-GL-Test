@@ -13,6 +13,7 @@
 
 <div id="start-screen">
     <div id="background-icons">
+      <img id="dog-icon" src="TemplateData/Dog loading.gif" alt="dog icon">
       <p id="loading-text"></p>
     </div>
 </div>
@@ -27,7 +28,7 @@
   <!--<canvas id="unity-canvas" width=540 height=960 tabindex="-1"
     style="width: 540px; height: 960px; background: #231F20"></canvas>-->
 
-  <script src="Build/loadTestBuild512.loader.js"></script>
+  <script src="Build/addLoadingBuild.loader.js"></script>
 
   <script>
 
@@ -56,13 +57,13 @@
 
   const unityCanvas = document.querySelector("#unity-canvas");
   const config = {
-  dataUrl: "Build/loadTestBuild512.data",
-  frameworkUrl: "Build/loadTestBuild512.framework.js",
-  codeUrl: "Build/loadTestBuild512.wasm",
+  dataUrl: "Build/addLoadingBuild.data",
+  frameworkUrl: "Build/addLoadingBuild.framework.js",
+  codeUrl: "Build/addLoadingBuild.wasm",
   streamingAssetsUrl: "StreamingAssets",
   companyName: "HSI",
   productName: "Unleash Play",
-  productVersion: "1.2.2 (123)",
+  productVersion: "1.2.2 (127)",
 };
 
 // Make loading bar follow real Unity progress
@@ -73,8 +74,9 @@ function UnityProgress(progress) {
 
 
   if (progress < 1) {
-    // While loading: update loading bar
-    loadingText.textContent = "";
+    // While loading: show percentage based on Unity progress
+    const percent = Math.round(progress * 100);
+    loadingText.textContent = `Preparing pets ${percent}%`;
   } else {
     // Finished loading: hide bar, show PLAY, clear texts
     startScreen.style.display = "none";
