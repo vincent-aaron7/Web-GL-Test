@@ -42,8 +42,6 @@
       animation: diagonal-scroll 5s linear infinite;
     }
 
-
-
     @keyframes diagonal-scroll {
       from {
         background-position: 0 0;
@@ -57,8 +55,7 @@
     #dog-icon {
       width: 75px;
       height: 60px;
-      /* Give the dog some space above the text */
-      margin-bottom: 10px;
+      margin-bottom: -20px;
     }
 
     p {
@@ -117,7 +114,7 @@
     }
 
     /* loading bar */
-    #loading-bar-container {
+    /* #loading-bar-container {
       width: 60%;
       height: 18px;
       border-radius: 10px;
@@ -136,4 +133,4 @@
     @keyframes loading-fill {
       from { width: 0%; }
       to   { width: 100%; }
-    }
+    } */

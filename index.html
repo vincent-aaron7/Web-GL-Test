@@ -28,7 +28,7 @@
   <!--<canvas id="unity-canvas" width=540 height=960 tabindex="-1"
     style="width: 540px; height: 960px; background: #231F20"></canvas>-->
 
-  <script src="Build/addLoadingBuild.loader.js"></script>
+  <script src="Build/testaddloadingnotext.loader.js"></script>
 
   <script>
 
@@ -57,37 +57,41 @@
 
   const unityCanvas = document.querySelector("#unity-canvas");
   const config = {
-  dataUrl: "Build/addLoadingBuild.data",
-  frameworkUrl: "Build/addLoadingBuild.framework.js",
-  codeUrl: "Build/addLoadingBuild.wasm",
+  dataUrl: "Build/testaddloadingnotext.data",
+  frameworkUrl: "Build/testaddloadingnotext.framework.js",
+  codeUrl: "Build/testaddloadingnotext.wasm",
   streamingAssetsUrl: "StreamingAssets",
   companyName: "HSI",
   productName: "Unleash Play",
   productVersion: "1.2.2 (127)",
 };
 
+  // Keep the loading overlay visible after Unity reports finished (ms)
+  const LOADING_OVERLAY_EXTRA_MS = 3000; // set to 3000 for 3s, change to 5000 for 5s
+
 // Make loading bar follow real Unity progress
 function UnityProgress(progress) {
   const loadingText = document.getElementById("loading-text");
-  const versionText = document.getElementById("version-text");
-
-
 
   if (progress < 1) {
-    // While loading: show percentage based on Unity progress
     const percent = Math.round(progress * 100);
-    loadingText.textContent = `Preparing pets ${percent}%`;
+  //  loadingText.textContent = percent + "%";
   } else {
-    // Finished loading: hide bar, show PLAY, clear texts
-    startScreen.style.display = "none";
-    unityContainer.style.display = "block";
-    
-    unityInstancePromise.then(unityInstance => {
-    MyGameInstance = unityInstance;
-    sendTokenToUnity();
-    });
+    // Unity finished loading resources
+      // Finished loading: wait briefly to cover Unity's own splash, then show canvas
+      const COVER_DELAY_MS = 2500; // milliseconds to keep custom loader visible
+      setTimeout(() => {
+        startScreen.style.display = "none";
+        unityContainer.style.display = "block";
+      }, COVER_DELAY_MS);
+
+      unityInstancePromise.then(unityInstance => {
+        MyGameInstance = unityInstance;
+        sendTokenToUnity();
+      });
   }
 }
+
 
 /*Create unity instance and load the config of the game.
   The promise result is stored on the variable. */
